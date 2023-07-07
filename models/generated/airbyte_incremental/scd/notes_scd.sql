@@ -1,7 +1,7 @@
 {{ config(
     indexes = [{'columns':['_airbyte_active_row','_airbyte_unique_key_scd','_airbyte_emitted_at'],'type': 'btree'}],
     unique_key = "_airbyte_unique_key_scd",
-    schema = "SCD",
+    schema = "scd",
     post_hook = ["
                     {%
                     set final_table_relation = adapter.get_relation(
@@ -48,7 +48,7 @@
                     -- We have to have a non-empty query, so just do a noop delete
                     delete from {{ this }} where 1=0
                     {% endif %}
-                    ","delete from Staging.notes_stg where _airbyte_emitted_at != (select max(_airbyte_emitted_at) from Staging.notes_stg)"],
+                    ","delete from staging.notes_stg where _airbyte_emitted_at != (select max(_airbyte_emitted_at) from staging.notes_stg)"],
     tags = [ "top-level" ]
 ) }}
 -- depends_on: ref('notes_stg')
@@ -118,6 +118,7 @@ scd_data as (
       noteid,
       placements,
       placementId,
+      placement_jobId,
       placement_jobTitle,
       placement_company,
       placement_companyId,
@@ -131,6 +132,7 @@ scd_data as (
       {{ adapter.quote('type') }},
       reference,
       createdat,
+      updatedat,
       candidates,
       candidateId,
       candidate_email,
@@ -215,6 +217,7 @@ select
         noteid,
         placements,
         placementId,
+        placement_jobId,
         placement_jobTitle,
         placement_company,
         placement_companyId,
@@ -228,6 +231,7 @@ select
         {{ adapter.quote('type') }},
         reference,
         createdat,
+        updatedat,
         candidates,
         candidateId,
         candidate_email,

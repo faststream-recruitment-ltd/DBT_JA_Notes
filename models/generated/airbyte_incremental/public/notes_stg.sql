@@ -1,7 +1,7 @@
 {{ config(
     indexes = [{'columns':['_airbyte_emitted_at'],'type':'btree'}],
     unique_key = '_airbyte_ab_id',
-    schema = "Staging",
+    schema = "staging",
     tags = [ "top-level-intermediate" ]
 ) }}
 -- SQL model to build a hash column based on the values of this record
@@ -23,6 +23,7 @@ select
         'noteid',
         array_to_string('placements'),
         'placementId',
+        'placement_jobId',
         'placement_jobTitle',
         'placement_company',
         'placement_companyId',
@@ -36,6 +37,7 @@ select
         adapter.quote('type'),
         'reference',
         'createdat',
+        'updatedat',
         array_to_string('candidates'),
         'candidateId',
         'candidate_email',
