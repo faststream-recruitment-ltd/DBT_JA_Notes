@@ -62,7 +62,8 @@ AND type IN (
         'Phone Call – Business Development',
         'Phone Call – business Development',
         'Phone Call – Control',
-        'Resume Submitted'
+        'Resume Submitted',
+        'Video Call'
     )
     AND source NOT LIKE '%Status%'
 {{ incremental_clause('_airbyte_emitted_at', this) }}
