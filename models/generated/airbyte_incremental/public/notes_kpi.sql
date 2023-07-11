@@ -66,5 +66,6 @@ AND type IN (
         'Video Call'
     )
     AND source NOT LIKE '%Status%'
+    AND updatedat >= '2022-01-01'
 {{ incremental_clause('_airbyte_emitted_at', this) }}
 
