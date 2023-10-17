@@ -65,8 +65,11 @@ AND type IN (
         'Resume Submitted',
         'Video Call',
         'Offer'
-    )
-    AND source NOT LIKE '%Status%'
-    AND updatedat >= '2022-01-01'
+)
+AND (
+    (type != 'Offer' AND source NOT LIKE '%Status%')
+    OR
+    (type = 'Offer')
+)
+AND updatedat >= '2022-01-01'
 {{ incremental_clause('_airbyte_emitted_at', this) }}
-
