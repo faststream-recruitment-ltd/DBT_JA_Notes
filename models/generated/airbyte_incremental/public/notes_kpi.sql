@@ -63,7 +63,8 @@ AND type IN (
         'Phone Call – business Development',
         'Phone Call – Control',
         'Resume Submitted',
-        'Video Call'
+        'Video Call',
+        'Offer'
     )
     AND source NOT LIKE '%Status%'
     AND updatedat >= '2022-01-01'
