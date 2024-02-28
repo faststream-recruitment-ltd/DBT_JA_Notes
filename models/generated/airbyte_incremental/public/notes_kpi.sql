@@ -56,6 +56,7 @@ AND type IN (
         'Float By Email',
         'Float by email',
         'Floated by email',
+        'Floated by Email',
         'Interview',
         'Left Voicemail/No Contact',
         'Phone Call',
